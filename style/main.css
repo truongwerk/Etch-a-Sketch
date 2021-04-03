@@ -1,0 +1,182 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol,
+ul {
+	list-style: none;
+}
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*Above is css reset */
+
+#container {
+	display: flex;
+	flex-flow: column nowrap;
+	width: 600px;
+	margin: 20px;
+	height: 600px;
+	border: 2px black solid;
+}
+.divRow {
+	display: flex;
+	flex-flow: row nowrap;
+}
+.pixelBoard {
+	border: 1px hsl(0, 0%, 0%) solid;
+	transition: all 0.1s;
+}
+body {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 20px;
+	align-items: center;
+	justify-content: center;
+}
+#clearSize {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+}
+#penMode {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+}
+button {
+	width: 150px;
+	height: 3em;
+	margin: 10px;
+	background-color: lavenderblush;
+	font-size: larger;
+	font-weight: bolder;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	border: 4px gray solid;
+	border-radius: 15px;
+	transition: all 0.2s;
+}
+button:hover {
+	background-color: lawngreen;
+	border: 4px black solid;
+}
+
+.choosingMode{
+	background-color: rgb(42, 182, 42);
+	border: 5px black solid;
+}
