@@ -1,3 +1,4 @@
+/*Css reset */
 html,
 body,
 div,
@@ -125,6 +126,7 @@ table {
 /*Above is css reset */
 
 #container {
+	background-color: white;
 	display: flex;
 	flex-flow: column nowrap;
 	width: 600px;
@@ -137,15 +139,30 @@ table {
 	flex-flow: row nowrap;
 }
 .pixelBoard {
-	border: 1px hsl(0, 0%, 0%) solid;
-	transition: all 0.1s;
+	border: 1px rgb(0, 0, 0, 0.3) solid;
+	transition: all 0.05s;
+}
+.pixelBoard:hover {
+	border: rgb(0, 0, 0) 1px solid;
 }
 body {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: column wrap;
 	margin: 20px;
 	align-items: center;
 	justify-content: center;
+	background-image: linear-gradient(
+			white,
+			rgb(168, 50, 162,0.3)
+		);
+}
+#main {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: center;
+	padding-right: 80px;
+	box-sizing: border-box;
 }
 #clearSize {
 	display: flex;
@@ -176,7 +193,29 @@ button:hover {
 	border: 4px black solid;
 }
 
-.choosingMode{
+.choosingMode {
 	background-color: rgb(42, 182, 42);
 	border: 5px black solid;
+}
+#credit {
+	text-align: center;
+	margin: 30px;
+}
+#credit h1 {
+	font-family: Orbitron;
+	font-size: 75px;
+	color: lightsalmon;
+}
+#credit h2 {
+	font-family: "Courier New", Courier, monospace;
+	font-size: x-large;
+	font-weight: bold;
+	color: olive;
+}
+#credit p {
+	font-size: larger;
+	color: black;
+}
+#credit p a {
+	color: rgb(235, 82, 22);
 }

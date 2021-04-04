@@ -1,11 +1,17 @@
 const divContainer = document.querySelector("#container");
+divContainer.addEventListener("click", function () {
+	togglePen();
+});
 let sketchSize = 16;
 let boardRatio = 600 / sketchSize;
-let penMode = 0;
+let penMode = "";
+let cells = [];
+let currentlyActive = false;
+let currentColor = [];
 
 /* Make sketch  with default */
-resize(sketchSize);
-function resize(sketchSize) {
+makeSketch(sketchSize);
+function makeSketch(sketchSize) {
 	removeAllChildNodes(divContainer);
 	for (let i = 1; i <= sketchSize; i++) {
 		let divRow = document.createElement("div");
@@ -14,19 +20,14 @@ function resize(sketchSize) {
 		divContainer.appendChild(divRow);
 		divRow.style.height = 600 / sketchSize + "px";
 		for (let j = 1; j <= sketchSize; j++) {
-			var divPixel = document.createElement("div");
-			divPixel.id = "pixel" + ((i - 1) * sketchSize + j);
-			divPixel.className = "pixelBoard";
-			divRow.appendChild(divPixel);
-			divPixel.style.width = 600 / sketchSize + "px";
+			let divPixelId = (i - 1) * sketchSize + j - 1;
+			cells[divPixelId] = document.createElement("div");
+			cells[divPixelId].id = "pixel" + ((i - 1) * sketchSize + j);
+			cells[divPixelId].className = "pixelBoard";
+			cells[divPixelId].style.width = 600 / sketchSize + "px";
+			divRow.appendChild(cells[divPixelId]);
+			cells[divPixelId].addEventListener("click", activatePen);
 		}
-	}
-	if (penMode == 1) {
-		pickMode();
-	} else if (penMode == 2) {
-		eraserMode();
-	} else if (penMode == 3) {
-		randomMode();
 	}
 }
 
@@ -36,7 +37,7 @@ resizebtn.addEventListener("click", changeSize, false);
 function changeSize(e) {
 	let playerInput = prompt("Choose your size (1-64)");
 	if (playerInput >= 1 && playerInput <= 64) {
-		resize(playerInput);
+		makeSketch(playerInput);
 	}
 }
 function removeAllChildNodes(parent) {
@@ -55,78 +56,78 @@ function clearSketch() {
 	);
 }
 
+/*Toggle pen, active pen */
+function togglePen() {
+	if (!currentlyActive) {
+		cells.forEach((item) => {
+			item.addEventListener("mouseleave", activatePen);
+		});
+		currentlyActive = true;
+	} else {
+		cells.forEach((item) => {
+			item.removeEventListener("mouseleave", activatePen);
+		});
+		currentlyActive = false;
+	}
+}
+function activatePen(e) {
+	switch (String(penMode)) {
+		case "randomMode":
+			currentColor = randomColor();
+			this.style.background = `rgba(${currentColor})`;
+			break;
+		case "eraserMode":
+			currentColor = "white";
+			this.style.background = `${currentColor}`;
+			break;
+		case "pickMode":
+			currentColor = pickColor();
+			this.style.background = `${currentColor}`;
+			console.log(currentColor);
+			break;
+		default:
+			this.style.background = "rgb(19, 123, 214, 0.95)";
+	}
+}
+
 /*Pick Mode*/
 const pickBtn = document.querySelector("#modePick");
 pickBtn.addEventListener("click", pickMode, false);
 function pickMode() {
-	penMode = 1;
+	penMode = "pickMode";
 	randomBtn.classList.remove("choosingMode");
 	eraserBtn.classList.remove("choosingMode");
 	pickBtn.classList.add("choosingMode");
-	const pixelBoardBox = document.querySelectorAll(".pixelBoard");
-	pixelBoardBox.forEach((pixelBoard) =>
-		pixelBoard.removeEventListener("mouseenter", drawRandom, false)
-	);
-	pixelBoardBox.forEach((pixelBoard) =>
-		pixelBoard.removeEventListener("mouseenter", drawEraser, false)
-	);
-	pixelBoardBox.forEach((pixelBoard) =>
-		pixelBoard.addEventListener("mouseenter", drawPick, false)
-	);
 }
-function drawPick(e) {
+function pickColor(e) {
 	const pickValue = document.querySelector("#colorPick").value;
-	this.style.background = `${pickValue}`;
+	return pickValue;
 }
 
 /*Eraser mode */
 const eraserBtn = document.querySelector("#modeEraser");
 eraserBtn.addEventListener("click", eraserMode, false);
 function eraserMode() {
-	penMode = 2;
+	penMode = "eraserMode";
 	pickBtn.classList.remove("choosingMode");
 	randomBtn.classList.remove("choosingMode");
 	eraserBtn.classList.add("choosingMode");
-	const pixelBoardBox = document.querySelectorAll(".pixelBoard");
-	pixelBoardBox.forEach((pixelBoard) =>
-		pixelBoard.removeEventListener("mouseenter", drawPick, false)
-	);
-	pixelBoardBox.forEach((pixelBoard) =>
-		pixelBoard.removeEventListener("mouseenter", drawRandom, false)
-	);
-	pixelBoardBox.forEach((pixelBoard) =>
-		pixelBoard.addEventListener("mouseenter", drawEraser, false)
-	);
-}
-function drawEraser(e) {
-	this.style.background = "white";
 }
 
-/* randomMode */
+/* random Mode */
 const randomBtn = document.querySelector("#modeRandom");
 randomBtn.addEventListener("click", randomMode, false);
 function randomMode() {
-	penMode = 3;
+	penMode = "randomMode";
 	eraserBtn.classList.remove("choosingMode");
 	pickBtn.classList.remove("choosingMode");
 	randomBtn.classList.add("choosingMode");
-	const pixelBoardBox = document.querySelectorAll(".pixelBoard");
-	pixelBoardBox.forEach((pixelBoard) =>
-		pixelBoard.removeEventListener("mouseenter", drawPick, false)
-	);
-	pixelBoardBox.forEach((pixelBoard) =>
-		pixelBoard.removeEventListener("mouseenter", drawEraser, false)
-	);
-	pixelBoardBox.forEach((pixelBoard) =>
-		pixelBoard.addEventListener("mouseenter", drawRandom, false)
-	);
 }
 function randomValue() {
-	let randomHueValue = Math.ceil(Math.random() * 255);
-	return randomHueValue;
+	let randomValue = Math.ceil(Math.random() * 255);
+	return randomValue;
 }
-function drawRandom(e) {
-	this.style.background = `rgb(${randomValue()},${randomValue()},${randomValue()})`;
+function randomColor() {
+	let randomColor = `${randomValue()},${randomValue()},${randomValue()}`;
+	return randomColor;
 }
-
-

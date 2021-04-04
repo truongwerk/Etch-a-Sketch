@@ -5,23 +5,45 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="style/main.css" />
+		<link rel="icon" href="images\Paint_Win10X.webp" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
 		<title>Etch a Sketch</title>
 	</head>
 	<body>
-		<div id="clearSize">
-			<button id="clear">Clear</button>
-			<button id="resize">Resize</button>
+		<div id="credit">
+			<h1>Etch-a-sketch</h1>
+			<h2>Click to toggle pen</h2>
+			<p>
+				Made by
+				<a
+					style="text-decoration: none"
+					href="https://twitter.com/dellphai"
+					target="_blank"
+					>Tong Quang Truong</a
+				>
+			</p>
 		</div>
 		<div id="main">
-            <div id="penMode">
-                <button id="modePick">Pick
-                <input type="color" name="" id="colorPick">
-                </button>
-                <button id="modeEraser">Eraser</button>
-                <button id="modeRandom">Random</button>
-            </div>
-			<div id="container"></div>
+			<div id="clearSize">
+				<button id="clear">Clear</button>
+				<button id="resize">Resize</button>
+			</div>
+			<div>
+				<div id="penMode">
+					<button id="modePick">
+						Pick
+						<input type="color" name="" id="colorPick" />
+					</button>
+					<button id="modeEraser">Eraser</button>
+					<button id="modeRandom">Random</button>
+				</div>
+				<div id="container"></div>
+			</div>
 		</div>
-		<script src="script/main.js"></script>
+		<script src="script\main.js"></script>
 	</body>
 </html>
