@@ -1,2 +1,2 @@
 # Etch-a-Sketch
-A project form theodinproject.com
+<a href='https://truongwerk.github.io/Etch-a-Sketch/' target="_blank" rel="noopener">LIVE</a>
